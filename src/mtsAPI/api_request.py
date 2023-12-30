@@ -16,14 +16,6 @@ class OnlineSimHandler:
         response = json.loads(request.text)
         return float(response["balance"])
 
-    def get_country_code(self):
-        request = requests.get(
-            url=SettingsManager.get_tariff_url(),
-            params={"apikey": self.api_key}
-        )
-        response = json.loads(request.text)
-        return response["countries"]["_7"]["code"]
-
     def get_service(self):
         request = requests.get(
             url="https://onlinesim.io/api/getTariffs.php",
@@ -55,7 +47,7 @@ class OnlineSimHandler:
             url=SettingsManager.get_new_number_url(),
             params={
                 "apikey": self.api_key,
-                "country": self.get_country_code(),
+                "country": 7,
                 "service": self.get_service()
                 }
         )
